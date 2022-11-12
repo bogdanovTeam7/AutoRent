@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<a href="/admin">vissza </a>
+	<h3>Foglalások</h3>
+	<p th:each="rent:${rents}" th:text="${rent}"></p>
+</body>
+</html>

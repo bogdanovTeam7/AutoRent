@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<a href="/admin">vissza </a>
+	<hr>
+	<a href="/carSaveForm">új kocsi</a>
+	<hr>
+	<table border="1px solid">
+		<tr>
+			<td>ID</td>
+			<td>Tipus</td>
+			<td>Napi ár</td>
+			<td>Aktiv-e</td>
+			<td>Kiválasztás</td>
+		</tr>
+		<tr th:each="car:${cars}">
+			<td th:text="${car.id}"></td>
+			<td th:text="${car.type}"></td>
+			<td th:text="${car.dayPrice}"></td>
+			<td th:text="${car.available}"></td>
+			<td><a th:href="'/carUpdateForm/' + ${car.id}">szerkeztés</a></td>
+		</tr>
+
+	</table>
+</body>
+</html>

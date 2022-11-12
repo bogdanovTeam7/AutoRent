@@ -52,7 +52,7 @@ public class Database {
 		return resultCars;
 	}
 
-	private List<Rent> getAllRentsByCarId(int id) {
+	public List<Rent> getAllRentsByCarId(int id) {
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("SELECT r FROM Rent r WHERE r.autoId=?1", Rent.class);
@@ -110,5 +110,53 @@ public class Database {
 		transaction.commit();
 		session.close();
 
+	}
+
+	public List<Rent> getAllRents() {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("SELECT r FROM Rent r", Rent.class);
+		List<Rent> rents = query.getResultList();
+		transaction.commit();
+		session.close();
+		return rents;
+	}
+
+	public List<Car> getAllRCars() {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("SELECT c FROM Car c", Car.class);
+		List<Car> cars = query.getResultList();
+		transaction.commit();
+		session.close();
+		return cars;
+	}
+
+	public void saveCar(Car car) {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(car);
+		transaction.commit();
+		session.close();
+	}
+
+	public List<Rent> getAllNotFinishedRentsByCarId(int id) {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("SELECT r FROM Rent r WHERE r.autoId=?1 AND r.dateTo<?2", Rent.class);
+		query.setParameter(1, id);
+		query.setParameter(2, new Date());
+		List<Rent> rents = query.getResultList();
+		transaction.commit();
+		session.close();
+		return rents;
+	}
+
+	public void updateCar(Car car) {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(car);
+		transaction.commit();
+		session.close();
 	}
 }

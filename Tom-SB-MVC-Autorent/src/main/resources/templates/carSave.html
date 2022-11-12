@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<a href="/admin">vissza </a>
+	<form action="/carSave" method="get">
+		<input type="text" name="type" placeholder="tipus" />
+		<input type="number" name="dayPrice" placeholder="napi ár" />
+		<label for="available">aktiv-e</label>
+		<input type="checkbox" name="available" />
+		<input type="submit" value="mentés" />
+	</form>
+</body>
+</html>

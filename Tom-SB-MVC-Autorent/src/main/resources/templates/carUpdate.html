@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<a href="/admin">vissza </a>
+	<form action="/carUpdate" method="get">
+		<input type="number" name="id" placeholder="${car.id}" />
+		<input type="text" name="type" placeholder="${car.type}" />
+		<input type="number" name="dayPrice" placeholder="${car.dayPrice}" />
+		<label for="available">aktiv-e</label>
+		<input type="checkbox" name="available" th:checked="${car.available}" />
+		<input type="submit" value="modositás" />
+	</form>
+</body>
+</html>
