@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<p th:text="${from}+' -tól'"></p>
+	<p th:text="${to}+' -ig'"></p>
+
+
+	<table border="1px solid">
+		<tr>
+			<td>ID</td>
+			<td>Tipus</td>
+			<td>Napi ár</td>
+			<td>Kiválasztás</td>
+		</tr>
+		<tr th:each="car:${cars}">
+			<td th:text="${car.id}"></td>
+			<td th:text="${car.type}"></td>
+			<td th:text="${car.dayPrice}"></td>
+			<td><a
+				th:href="'/carRentForm/' + ${car.id} + '/' + ${from} + '/' + ${to}">tovább...</a></td>
+		</tr>
+
+	</table>
+</body>
+</html>

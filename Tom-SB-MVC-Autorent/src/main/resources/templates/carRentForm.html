@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<form action="/rentCar" method="post">
+
+		<input type="hidden" name="carId" th:value="${car.id}" />
+		<input type="text" name="name" placeholder="név" />
+		<input type="text" name="email" placeholder="email" />
+		<input type="text" name="address" placeholder="cím" />
+		<input type="tel" name="phone" placeholder="telefonszám" />
+		<input type="date" name="from"
+			th:value="${dateChecker.getFromAsString()}" />
+		<input type="date" name="to" th:value="${dateChecker.getToAsString()}" />
+
+		<p th:text="'foglalandó napok száma: ' + ${dateChecker.getDays()}"></p>
+		<p th:if="${dateChecker.getDays()}"
+			th:text="'foglalás teljes összege: ' + ${dateChecker.getDays()*car.dayPrice} + ' Ft'"></p>
+
+		<input type="submit" value="Rendelés" />
+
+	</form>
+
+</body>
+</html>

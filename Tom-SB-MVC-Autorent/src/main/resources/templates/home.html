@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autorent</title>
+</head>
+<body>
+	<p th:text="${feedback}"></p>
+	<form action="/searchAvailableCars" method="get">
+		<input type="date" name="from" />
+		<input type="date" name="to" />
+		<input type="submit" value="Keresés" />
+	</form>
+
+</body>
+</html>

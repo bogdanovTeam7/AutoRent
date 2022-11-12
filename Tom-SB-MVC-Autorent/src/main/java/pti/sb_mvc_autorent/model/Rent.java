@@ -23,10 +23,10 @@ public class Rent {
 	@Column(name = "user_id")
 	private int userId;
 	@Column(name = "date_from")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateFrom;
 	@Column(name = "date_to")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTo;
 
 	public Rent(int autoId, int userId, Date dateFrom, Date dateTo) {
@@ -79,6 +79,10 @@ public class Rent {
 
 	public void setDateTo(Date dateTo) {
 		this.dateTo = dateTo;
+	}
+
+	public boolean fallsIn(Date date) {
+		return dateFrom.getTime() <= date.getTime() && date.getTime() <= dateTo.getTime();
 	}
 
 	@Override
