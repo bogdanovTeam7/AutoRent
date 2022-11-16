@@ -23,10 +23,10 @@ public class Rent {
 	@Column(name = "user_id")
 	private int userId;
 	@Column(name = "date_from")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateFrom;
 	@Column(name = "date_to")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateTo;
 
 	public Rent(int autoId, int userId, Date dateFrom, Date dateTo) {
@@ -81,8 +81,20 @@ public class Rent {
 		this.dateTo = dateTo;
 	}
 
-	public boolean fallsIn(Date date) {
-		return dateFrom.getTime() <= date.getTime() && date.getTime() <= dateTo.getTime();
+	public boolean isConcurrence(Date dateTocheckFrom, Date dateTocheckTo) {
+		boolean isConcurrence = false;
+
+		if (dateFrom.getTime() <= dateTocheckFrom.getTime() && dateTocheckFrom.getTime() <= dateTo.getTime()) {
+			isConcurrence = true;
+		}
+		if (dateFrom.getTime() <= dateTocheckTo.getTime() && dateTocheckTo.getTime() <= dateTo.getTime()) {
+			isConcurrence = true;
+		}
+		if (dateTocheckFrom.getTime() <= dateFrom.getTime() && dateFrom.getTime() <= dateTocheckTo.getTime()) {
+			isConcurrence = true;
+		}
+
+		return isConcurrence;
 	}
 
 	@Override

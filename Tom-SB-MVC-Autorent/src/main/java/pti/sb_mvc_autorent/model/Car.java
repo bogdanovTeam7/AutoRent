@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import org.springframework.util.Base64Utils;
 
 @Entity
 @Table(name = "cars")
@@ -20,6 +23,9 @@ public class Car {
 	private int dayPrice;
 	@Column(name = "available")
 	private boolean available;
+	@Lob
+	@Column(name = "image")
+	private byte[] image;
 
 	public Car() {
 		super();
@@ -30,6 +36,7 @@ public class Car {
 		this.type = type;
 		this.dayPrice = dayPrice;
 		this.available = available;
+
 	}
 
 	public int getId() {
@@ -62,6 +69,23 @@ public class Car {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public String getImageBase64() {
+		String base64String = "";
+		if (image != null) {
+			byte[] base64Array = Base64Utils.encode(image);
+			base64String = new String(base64Array);
+		}
+		return base64String;
 	}
 
 	@Override

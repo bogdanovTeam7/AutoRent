@@ -7,11 +7,13 @@
 <body>
 	<p th:text="${feedback}"></p>
 	<a href="/admin">vissza </a>
-	<form action="/carSave" method="get">
-		<input type="text" name="type" placeholder="tipus" />
-		<input type="number" name="dayPrice" placeholder="napi ár" />
-		<label for="available">aktiv-e</label>
-		<input type="checkbox" name="available" />
+	<form action="/carSave" enctype="multipart/form-data" method="post">
+		<input type="text" name="type" placeholder="tipus" required />
+		<input type="number" name="dayPrice" placeholder="napi ár" required />
+		<label for="available">aktiv-e:</label>
+		<input type="checkbox" name="available" checked="checked" />
+		<br> <label for="file">kép:</label>
+		<input type="file" name="file" />
 		<input type="submit" value="mentés" />
 	</form>
 </body>

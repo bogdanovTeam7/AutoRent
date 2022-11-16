@@ -38,7 +38,7 @@ public class Database {
 			List<Rent> rents = getAllRentsByCarId(car.getId());
 			boolean available = true;
 			for (Rent rent : rents) {
-				boolean isConcurrence = rent.fallsIn(dateFrom) || rent.fallsIn(dateTo);
+				boolean isConcurrence = rent.isConcurrence(dateFrom, dateTo);
 				if (isConcurrence) {
 					available = false;
 					break;
@@ -63,7 +63,7 @@ public class Database {
 		return rents;
 	}
 
-	private List<Car> getAllAvailableCars() {
+	public List<Car> getAllAvailableCars() {
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("SELECT c FROM Car c WHERE c.available=?1", Car.class);
@@ -143,7 +143,7 @@ public class Database {
 	public List<Rent> getAllNotFinishedRentsByCarId(int id) {
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery("SELECT r FROM Rent r WHERE r.autoId=?1 AND r.dateTo<?2", Rent.class);
+		Query query = session.createQuery("SELECT r FROM Rent r WHERE r.autoId=?1 AND r.dateTo>=?2", Rent.class);
 		query.setParameter(1, id);
 		query.setParameter(2, new Date());
 		List<Rent> rents = query.getResultList();
@@ -158,5 +158,17 @@ public class Database {
 		session.update(car);
 		transaction.commit();
 		session.close();
+	}
+
+	public Car getAvailableCarByCarId(int carId, Date dateFrom, Date dateTo) {
+		List<Car> cars = getAvailableCars(dateFrom, dateTo);
+		Car car = null;
+		for (Car c : cars) {
+			if (c.getId() == carId) {
+				car = c;
+				break;
+			}
+		}
+		return car;
 	}
 }

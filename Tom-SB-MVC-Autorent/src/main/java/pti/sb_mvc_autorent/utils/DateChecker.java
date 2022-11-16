@@ -3,7 +3,6 @@ package pti.sb_mvc_autorent.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -14,9 +13,7 @@ public class DateChecker {
 
 	public DateChecker(String fromAsString, String toAsString) {
 		from = getDate(fromAsString);
-
-		Date temp = getDate(toAsString);
-		to = new Date(temp.getTime() + (1000 * 60 * 60 * 24) - 1000);
+		to = getDate(toAsString);
 	}
 
 	private Date getDate(String dateAsString) {

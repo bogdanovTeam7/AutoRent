@@ -16,6 +16,7 @@
 			<td>Tipus</td>
 			<td>Napi ár</td>
 			<td>Aktiv-e</td>
+			<td>Kép</td>
 			<td>Kiválasztás</td>
 		</tr>
 		<tr th:each="car:${cars}">
@@ -23,6 +24,9 @@
 			<td th:text="${car.type}"></td>
 			<td th:text="${car.dayPrice}"></td>
 			<td th:text="${car.available}"></td>
+			<td><img
+					th:src="'data:image/jpeg;base64,' + ${car.getImageBase64()}"
+					alt="<nincs kép>" /></td>
 			<td><a th:href="'/carUpdateForm/' + ${car.id}">szerkeztés</a></td>
 		</tr>
 

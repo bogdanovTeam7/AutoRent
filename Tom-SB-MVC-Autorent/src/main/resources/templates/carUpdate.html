@@ -7,12 +7,17 @@
 <body>
 	<p th:text="${feedback}"></p>
 	<a href="/admin">vissza </a>
-	<form action="/carUpdate" method="get">
-		<input type="number" name="id" placeholder="${car.id}" />
-		<input type="text" name="type" placeholder="${car.type}" />
-		<input type="number" name="dayPrice" placeholder="${car.dayPrice}" />
+	<form action="/carUpdate" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="id" th:value="${car.id} " />
+		<input type="text" name="type" th:value="${car.type}" />
+		<input type="number" name="dayPrice" th:value="${car.dayPrice}" />
 		<label for="available">aktiv-e</label>
-		<input type="checkbox" name="available" th:checked="${car.available}" />
+		<input type="checkbox" name="available" th:checked="${car.available}"
+			required />
+		<br> <img
+			th:src="'data:image/jpeg;base64,' + ${car.getImageBase64()}"
+			alt="<nincs kép>" /> <br> <label for="file">képcsere:</label>
+		<input type="file" name="file" />
 		<input type="submit" value="modositás" />
 	</form>
 </body>

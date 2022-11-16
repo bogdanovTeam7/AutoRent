@@ -6,6 +6,11 @@
 </head>
 <body>
 	<p th:text="${feedback}"></p>
+	<p th:text=" ${car}"></p>
+	<br>
+	<img th:src="'data:image/jpeg;base64,' + ${car.getImageBase64()}"
+		alt="<nincs kép>" />
+	<h3>Megrendelő adatai</h3>
 	<form action="/rentCar" method="post">
 
 		<input type="hidden" name="carId" th:value="${car.id}" />
